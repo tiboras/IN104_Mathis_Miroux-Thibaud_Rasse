@@ -1,7 +1,10 @@
 import unittest
 
 class testAnimal(unittest.TestCase):
-
-	def couleurPossible=["bleu","rouge","vert","jaune"]
+	couleurPossible=["bleu","rouge","vert","jaune"]
+	
+	def test_couleur(self):
+		self.assertTrue(self.couleurPossible)
+	
 
 

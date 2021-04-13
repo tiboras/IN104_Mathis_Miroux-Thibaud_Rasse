@@ -8,8 +8,11 @@ class testAnimal(unittest.TestCase):
 		self.assertTrue(self.couleurPossible)
 	
 
+<<<<<<< HEAD
 	def test_temps_gestation(self)
 		self.assertRaises(IN104_TD2.OutOfRangeError, IN104_TD2.main, 9) #créer cdans IN104TD2 un si temps de gestation trp grand raise l'erreur quu'il faut.
 
 
 
+=======
+>>>>>>> 2e0a73887d6377d6d61df9d4590017fbff23cded

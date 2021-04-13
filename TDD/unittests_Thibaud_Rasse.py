@@ -6,6 +6,11 @@ class testAnimal(unittest.TestCase):
 	
 	def test_couleur(self):
 		self.assertTrue(self.couleurPossible)
+
+	def test_temps gestation(self):
+		self.assertTrue((self.tempsGestation<12)&(self.tempsGestation>1))
+
+
 	
 
 <<<<<<< HEAD

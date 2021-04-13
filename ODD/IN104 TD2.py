@@ -53,3 +53,5 @@ coucou=oiseau("coucou",3,0.4)
 coucou.couleur("rouge")
 coucou.tailleOeuf(2)
 coucou.printoiseau()
+
+# j'ai travaillé avec Thiabud sur ce code

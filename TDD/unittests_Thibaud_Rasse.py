@@ -8,5 +8,3 @@ class testAnimal(unittest.TestCase):
 		self.assertTrue(self.couleurPossible)
 	
 
-
-#hgusdbsdjifskd

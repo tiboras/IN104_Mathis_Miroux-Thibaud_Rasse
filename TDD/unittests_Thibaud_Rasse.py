@@ -9,7 +9,7 @@ class testAnimal(unittest.TestCase):
 		coucou.couleur("rouge")
 		self.assertTrue(self.couleurPossible)
 
-	def test_temps gestation(self):
+	def test_temps_gestation(self):
 		
 		marmotte=mamifère("marmotte",5,5)
 		marmotte.tempsGestation(5)

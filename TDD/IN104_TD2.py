@@ -8,10 +8,6 @@ class Animal:
         self.size = size
 
 
-
-
-
-
 class mamifère(Animal):
 
 	def _init_(self,couleurPelage,tempsGestation):
@@ -23,11 +19,6 @@ class mamifère(Animal):
 
 	def tempsGestation(self,tempsGestation):
 		self.tempsGestation=tempsGestation
-
-
-
-
-	
 
 
 class oiseau(Animal):
@@ -43,15 +34,23 @@ class oiseau(Animal):
 		self.tailleOeuf=tailleOeuf
 
 	def printoiseau(self):
-		print ("l'oiseau s'apelle " ,self.name, "il est de couleur ", self.couleurPlume)
+		print ("L'oiseau s'appelle" ,self.name, ",ses plumes sont de couleur", self.couleurPlume)
 
 
+class OutOfRangeError(ValueError) :
+	pass
 
 
+def definition_animal(gestation):	
+	if not (1<gestation<12) :	
+		raise OutOfRangeError("le temps de gestation est trop long")
 
-def main():
+	taille_Oeuf = 2
 	coucou=oiseau("coucou",3,0.4)
 	coucou.couleur("rouge")
-	coucou.tailleOeuf(2)
+	coucou.tailleOeuf(taille_Oeuf)
 	coucou.printoiseau()
-# j'ai travaillé avec Thiabud sur ce code
+
+	
+
+definition_animal(8)

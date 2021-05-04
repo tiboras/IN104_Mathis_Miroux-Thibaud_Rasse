@@ -67,6 +67,7 @@ class IEngine:
             positions[2*k], positions[2*k+1]=get_x(self.world.get(k).position) , get_y(self.world.get(k).position)
             vitesse[2*k],vitesse[2*k+1] = velocity.get.self.world(k)
         result=np.concatenate((positions, vitesse), axis=None)
+        return result
         raise NotImplementedError
 
 

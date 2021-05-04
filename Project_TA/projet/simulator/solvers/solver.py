@@ -30,8 +30,8 @@ class ISolver:
         for k in range(1,t+1):
             y[k]=y[k-1] +dt*f(k*dt,y[k])
         
-
-        raise NotImplementedError
+        return y
+        #raise NotImplementedError
 
 
 class DummySolver(ISolver):

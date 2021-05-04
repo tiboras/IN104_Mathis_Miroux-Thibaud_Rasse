@@ -29,11 +29,11 @@ class IEngine:
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
         """
         """faire une matrice des forces"""
-        forces = np.empty((N,N), dtype = object)
-        for i in range(N):
-            for j in range(i+1):
-                forces[i,j] = gravitational_force(y0[2*i],masses[i], y0[2*j],masses[j])
-                forces[j,i] = -1* gravitational_force(y0[2*i],masses[i], y0[2*j],masses[j])
+        forces = np.empty((N,N), dtype = Vector) #utiliser le inti ?
+        for i in range(1,len(world)+1):
+            for j in range(1,i):
+                F[i][j]=G*mass.get.world(i)*mass.get.world(j)*(position.get.world(i)-position.get.world(j))/norm.Vector(position.get.world(i)-position.get.world(j))**(3/2)
+                F[j,i] = -F[i,j]
         forces_appliques = forces * np.ones((N,1)) #faire la somme des forces appliqueés à toutes les planètes
         deriv = vector(4*N)
         deriv[1:2*N] = y0[2*N:]
@@ -43,6 +43,7 @@ class IEngine:
         return deriv
 
 
+        raise NotImplementedError
 
     def make_solver_state(self):
         """ Returns the state given to the solver, it is the vector y in

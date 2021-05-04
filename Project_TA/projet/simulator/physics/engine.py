@@ -30,14 +30,14 @@ class IEngine:
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
         """
         """faire une matrice des forces"""
-        N = len(world)
-        Fx = np.empty((N,N), dtype = Vector) #utiliser le inti ?
-        Fy = np.empty((N,N), dtype = Vector) #utiliser le inti ?
-        for i in range(1,len(world)+1):
+        N = len(self.world)
+        Fx = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
+        Fy = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
+        for i in range(1,len(self.world)+1):
             for j in range(1,i):
-                Fx[i][j]=G*mass.get.world(i)*mass.get.world(j)*(get_x(position.get.world(i)-position.get.world(j)))/norm.Vector(position.get.world(i)-position.get.world(j))**(3/2)
+                Fx[i][j]=G*mass.get.self.world(i)*mass.get.self.world(j)*(get_x(position.get.self.world(i)-position.get.self.world(j)))/norm.Vector(position.get.self.world(i)-position.get.self.world(j))**(3/2)
                 Fx[j,i] = -Fx[i,j]
-                Fy[i][j]=G*mass.get.world(i)*mass.get.world(j)*(get_y(position.get.world(i)-position.get.world(j)))/norm.Vector(position.get.world(i)-position.get.world(j))**(3/2)
+                Fy[i][j]=G*mass.get.self.world(i)*mass.get.self.world(j)*(get_y(position.get.self.world(i)-position.get.self.world(j)))/norm.Vector(position.get.self.world(i)-position.get.self.world(j))**(3/2)
                 Fy[j,i] = -Fy[i,j]
 
 
@@ -47,8 +47,8 @@ class IEngine:
         deriv = vector(4*N)
         deriv[1:2*N] = y0[2*N:]
         for i in range(N):
-            deriv[2*N+ (2*i)] = (forces_appliques_x[i])/mass.get.world(i)
-            deriv[2*N+ (2*i+1)] = (forces_appliques_y[i])/mass.get.world(i)
+            deriv[2*N+ (2*i)] = (forces_appliques_x[i])/mass.get.self.world(i)
+            deriv[2*N+ (2*i+1)] = (forces_appliques_y[i])/mass.get.self.world(i)
         return deriv
 
         
@@ -60,12 +60,12 @@ class IEngine:
                 [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
             where xi, yi are the positions and vxi, vyi are the velocities.
         """
-
-        positions=np.zeros(N,1)
-        vitesse=np.zeros(N,1)
+        N = len(self.world)
+        positions=np.zeros((2*N,1))
+        vitesse=np.zeros((2*N,1))
         for k in range(N):
-            positions[k]=position.get.world(k)
-            vitesse[k]=velocity.get.world(k)
+            positions[2*k], positions[2*k+1]=get_x(self.world.get(k).position) , get_y(self.world.get(k).position)
+            vitesse[2*k],vitesse[2*k+1] = velocity.get.self.world(k)
         result=np.concatenate((positions, vitesse), axis=None)
         raise NotImplementedError
 

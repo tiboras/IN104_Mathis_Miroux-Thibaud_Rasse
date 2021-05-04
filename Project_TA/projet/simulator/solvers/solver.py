@@ -25,11 +25,10 @@ class ISolver:
             Return the new state at time t.
         """
         y=[]
-        y[0]=self.y0
+        y.append(self.y0)
         dt=t//self.max_step_size
-        for k in range(1,t+1):
-            y[k]=y[k-1] +dt*f(k*dt,y[k])
-        
+        for k in range(1,int(t)+1):
+            y.append(y[k-1] +dt*self.f(k*dt,y[k]))
         return y
         #raise NotImplementedError
 

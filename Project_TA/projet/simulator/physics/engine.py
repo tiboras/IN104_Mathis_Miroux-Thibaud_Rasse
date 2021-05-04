@@ -35,9 +35,9 @@ class IEngine:
         Fy = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
         for i in range(1,len(self.world)+1):
             for j in range(1,i):
-                Fx[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_x-self.world.get(j).position;get_x)/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
+                Fx[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_x()-self.world.get(j).position.get_x()())/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
                 Fx[j,i] = -Fx[i,j]
-                Fy[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_y-self.world.get(j).position.get_y)/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
+                Fy[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_y()-self.world.get(j).position.get_y())/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
                 Fy[j,i] = -Fy[i,j]
 
 
@@ -64,8 +64,8 @@ class IEngine:
         positions=np.zeros((2*N,1))
         vitesse=np.zeros((2*N,1))
         for k in range(N):
-            positions[2*k], positions[2*k+1]= self.world.get(k).position.get_x , self.world.get(k).position.get_y
-            vitesse[2*k],vitesse[2*k+1] =  self.world.get(k).vitesse.get_x , self.world.get(k).vitesse.get_y
+            positions[2*k], positions[2*k+1]= self.world.get(k).position.get_x() , self.world.get(k).position.get_y()
+            vitesse[2*k],vitesse[2*k+1] =  self.world.get(k).velocity.get_x() , self.world.get(k).velocity.get_y()
         result=np.concatenate((positions, vitesse), axis=None)
         return result
         raise NotImplementedError

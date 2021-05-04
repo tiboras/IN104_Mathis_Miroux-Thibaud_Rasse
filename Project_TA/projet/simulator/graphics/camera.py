@@ -1,5 +1,7 @@
 from ..utils.vector import Vector2
-
+"""Initialement la caméra se situe en 0,0. Sont affichées les planètes qui se situent dans l'écran c'est à dire les coordonnées 800*600. 
+Le reste n'est pas affiché (coordonnées négatives). 
+Le facteur scale n'est que utilisé lorsque """
 
 class Camera:
     def __init__(self, screen_size):

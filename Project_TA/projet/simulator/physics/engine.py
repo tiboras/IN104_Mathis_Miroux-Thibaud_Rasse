@@ -35,9 +35,9 @@ class IEngine:
         Fy = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
         for i in range(1,len(self.world)+1):
             for j in range(1,i):
-                Fx[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(get_x(self.world.get(i).position)-get_x(self.world.get(j).position))/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
+                Fx[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_x-self.world.get(j).position;get_x)/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
                 Fx[j,i] = -Fx[i,j]
-                Fy[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(get_y(self.world.get(i).position-self.world.get(j).position))/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
+                Fy[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_y-self.world.get(j).position.get_y)/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
                 Fy[j,i] = -Fy[i,j]
 
 

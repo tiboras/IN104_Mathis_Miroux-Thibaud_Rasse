@@ -24,11 +24,10 @@ class ISolver:
             throughout the execution of the program.
             Return the new state at time t.
         """
-        y=[]
-        y[0]=self.y0
+        y=self.y0
         dt=t//self.max_step_size
         for k in range(1,t+1):
-            y[k]=y[k-1] +dt*f(k*dt,y[k])
+            y=y +dt*self.f(k*dt,y)
         
         return y
         #raise NotImplementedError

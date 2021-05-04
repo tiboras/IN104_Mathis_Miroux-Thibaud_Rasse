@@ -33,18 +33,18 @@ class IEngine:
         N = len(self.world)
         Fx = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
         Fy = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
-        for i in range(1,len(self.world)+1):
-            for j in range(1,i):
-                Fx[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_x()-self.world.get(j).position.get_x()())/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
+        for i in range(len(self.world)):
+            for j in range(i):
+                Fx[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_x()-self.world.get(j).position.get_x())/((self.world.get(i).position-self.world.get(j).position).norm())**(3/2)
                 Fx[j,i] = -Fx[i,j]
-                Fy[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_y()-self.world.get(j).position.get_y())/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
+                Fy[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_y()-self.world.get(j).position.get_y())/((self.world.get(i).position-self.world.get(j).position).norm())**(3/2)
                 Fy[j,i] = -Fy[i,j]
 
 
         forces_appliques_x = Fx * np.ones((N,1)) #faire la somme des forces appliqueés à toutes les planètes
         forces_appliques_y = Fy * np.ones((N,1)) #faire la somme des forces appliqueés à toutes les planètes
 
-        deriv = vector(4*N)
+        deriv = Vector(4*N)
         deriv[1:2*N] = y0[2*N:]
         for i in range(N):
             deriv[2*N+ (2*i)] = (forces_appliques_x[i])/self.world.get(i).mass

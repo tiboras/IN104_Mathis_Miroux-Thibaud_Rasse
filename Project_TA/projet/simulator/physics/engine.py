@@ -1,5 +1,6 @@
 from ..utils.vector import Vector, Vector2
 from .constants import G
+import numpy as np
 
 
 def gravitational_force(pos1, mass1, pos2, mass2):
@@ -25,6 +26,12 @@ class IEngine:
                 [vx1, vy1, vx2, vy2, ..., vxn, vyn, ax1, ay1, ax2, ay2, ..., axn, ayn]
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
         """
+        F=np.zeros(len(world))
+        for i in range(1,len(world)+1):
+            for j in range(1,i+1):
+                F[i][j]=G*mass.get.world(i)*mass.get.world(j)*(position.get.world(i)-position.get.world(j)/norm.Vector(position.get.world(i)-position.get.world(j))**(3/2)
+
+
         raise NotImplementedError
 
     def make_solver_state(self):

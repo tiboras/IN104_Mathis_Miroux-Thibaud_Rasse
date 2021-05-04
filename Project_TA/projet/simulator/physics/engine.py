@@ -16,7 +16,8 @@ class IEngine:
     def __init__(self, world):
         self.world = world
 
-    def derivatives(self, t0, y0, ,N):
+
+    def derivatives(self, t0, y0):
         """ This is the method that will be fed to the solver
             it does not use it's first argument t0,
             its second argument y0 is a vector containing the positions 
@@ -59,6 +60,13 @@ class IEngine:
                 [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
             where xi, yi are the positions and vxi, vyi are the velocities.
         """
+
+        positions=np.zeros(N,1)
+        vitesse=np.zeros(N,1)
+        for k in range(N):
+            positions[k]=position.get.world(k)
+            vitesse[k]=velocity.get.world(k)
+        result=np.concatenate((positions, vitesse), axis=None)
         raise NotImplementedError
 
 

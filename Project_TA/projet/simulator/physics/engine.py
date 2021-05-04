@@ -35,9 +35,9 @@ class IEngine:
         Fy = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
         for i in range(1,len(self.world)+1):
             for j in range(1,i):
-                Fx[i][j]=G*mass.get.self.world(i)*mass.get.self.world(j)*(get_x(position.get.self.world(i)-position.get.self.world(j)))/norm.Vector(position.get.self.world(i)-position.get.self.world(j))**(3/2)
+                Fx[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(get_x(self.world.get(i).position)-get_x(self.world.get(j).position))/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
                 Fx[j,i] = -Fx[i,j]
-                Fy[i][j]=G*mass.get.self.world(i)*mass.get.self.world(j)*(get_y(position.get.self.world(i)-position.get.self.world(j)))/norm.Vector(position.get.self.world(i)-position.get.self.world(j))**(3/2)
+                Fy[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(get_y(self.world.get(i).position-self.world.get(j).position))/norm.Vector(self.world.get(i).position-self.world.get(j).position)**(3/2)
                 Fy[j,i] = -Fy[i,j]
 
 
@@ -47,8 +47,8 @@ class IEngine:
         deriv = vector(4*N)
         deriv[1:2*N] = y0[2*N:]
         for i in range(N):
-            deriv[2*N+ (2*i)] = (forces_appliques_x[i])/mass.get.self.world(i)
-            deriv[2*N+ (2*i+1)] = (forces_appliques_y[i])/mass.get.self.world(i)
+            deriv[2*N+ (2*i)] = (forces_appliques_x[i])/self.world.get(i).mass
+            deriv[2*N+ (2*i+1)] = (forces_appliques_y[i])/self.world.get(i).mass
         return deriv
 
         

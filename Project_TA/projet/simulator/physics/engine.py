@@ -41,14 +41,15 @@ class IEngine:
                 Fy[j,i] = -Fy[i,j]
 
 
-        forces_appliques_x = Fx * np.ones((N,1)) #faire la somme des forces appliqueés à toutes les planètes
-        forces_appliques_y = Fy * np.ones((N,1)) #faire la somme des forces appliqueés à toutes les planètes
+        forces_appliques_x = np.dot(Fx, np.ones((N,1))) #faire la somme des forces appliqueés à toutes les planètes
+        forces_appliques_y = np.dot(Fy, np.ones((N,1))) #faire la somme des forces appliqueés à toutes les planètes
 
         deriv = Vector(4*N)
-        deriv[1:2*N] = y0[2*N:]
+        for j in range(2*N) :
+            deriv[i] = y0[2*N+i]
         for i in range(N):
-            deriv[2*N+ (2*i)] = (forces_appliques_x[i])/self.world.get(i).mass
-            deriv[2*N+ (2*i+1)] = (forces_appliques_y[i])/self.world.get(i).mass
+            deriv[2*N+ (2*i)] = (forces_appliques_x[i,0])/self.world.get(i).mass
+            deriv[2*N+ (2*i+1)] = (forces_appliques_y[i,0])/self.world.get(i).mass
         return deriv
 
         
@@ -62,15 +63,15 @@ class IEngine:
         """
         N = len(self.world)
        
-        postions=[]
-        vitesse=[]
+        pos_vit=Vector(4*N)
         for k in range(N):
-            positions.append(self.world.get(k).position.get_x())
-            positions.append(self.world.get(k).position.get_y())
-            vitesses.append(self.world.get(k).velocity.get_x())
-            vitesses.append(self.world.get(k).velocity.get_y())
+            pos_vit[2*k]=self.world.get(k).position.get_x()
+            pos_vit[2*k+1]=self.world.get(k).position.get_y()
+            pos_vit[2*N+2*k]=self.world.get(k).velocity.get_x()
+            pos_vit[2*N+2*k+1]=self.world.get(k).velocity.get_y()
+            print(pos_vit)
+        return pos_vit
 
-        return positions+vitesses
 
 
 

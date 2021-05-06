@@ -9,12 +9,12 @@ from simulator.graphics import Screen
 import pygame as pg
 
 if __name__ == "__main__":
-    b1 = Body(Vector2(0, 0),
+    b1 = Body(Vector2(100, 300),
               velocity=Vector2(0, 0),
               mass=10,
-              draw_radius=10)
-    b2 = Body(Vector2(1, 1),
-              velocity=Vector2(0, 0.2),
+              draw_radius=100)
+    b2 = Body(Vector2(100, 400),
+              velocity=Vector2(0, 10),
               mass=1,
               draw_radius=5)
 
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     screen_size = Vector2(800, 600)
     screen = Screen(screen_size,
-                    bg_color=(0, 0, 0),
+                    bg_color=(200, 0, 0),
                     caption="Simulator")
     screen.camera.scale = 50
 

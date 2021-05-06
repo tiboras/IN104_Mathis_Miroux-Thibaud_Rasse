@@ -139,3 +139,10 @@ class Vector2(Vector):
 
     def set_x(self, value): self[0] = value
     def set_y(self, value): self[1] = value
+
+class VectorMatrix : 
+    def __init__(self, lignes, colonnes) :
+        self.l = lignes
+        self.c = colonnes
+        self.matrice_x = [[0 for i in range(self.l)] for i in range(self.c)]
+        self.matrice_y = [[0 for i in range(self.l)] for i in range(self.c)]

@@ -28,7 +28,7 @@ class ISolver:
         y=self.y0
         dt=t//self.max_step_size
         for k in range(1,int(t)+1):
-            y=y +dt*self.f(k*dt,y)
+            y = y+(dt*(self.f(k*dt,y))) 
         return y
         #raise NotImplementedError
 

@@ -1,7 +1,7 @@
 import unittest
 from .. import Body, World
 from ..utils.vector import Vector2, Vector
-from ..physics.engine import DummyEngine, gravitational_force
+from ..physics.engine import IEngine, gravitational_force
 from ..physics.constants import G
 
 # region Solvers

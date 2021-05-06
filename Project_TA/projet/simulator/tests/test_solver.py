@@ -1,6 +1,6 @@
 import unittest
 from math import cos, sin, sqrt, exp, pi
-from ..solvers import DummySolver
+from ..solvers.solver import ISolver
 
 # region ODE Systems
 

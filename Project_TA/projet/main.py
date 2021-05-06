@@ -2,8 +2,8 @@
 
 from simulator import Simulator, World, Body
 from simulator.utils.vector import Vector2
-from simulator.solvers import DummySolver
-from simulator.physics.engine import DummyEngine
+from simulator.solvers.solver import ISolver
+from simulator.physics.engine import IEngine
 from simulator.graphics import Screen
 
 import pygame as pg
@@ -12,17 +12,22 @@ if __name__ == "__main__":
     b1 = Body(Vector2(100, 300),
               velocity=Vector2(0, 0),
               mass=10,
-              draw_radius=100)
+              draw_radius=10)
     b2 = Body(Vector2(100, 400),
               velocity=Vector2(0, 10),
               mass=1,
               draw_radius=5)
 
+    b3 = Body(Vector2(200, 500),
+              velocity=Vector2(0, 100),
+              mass=1,
+              draw_radius=5)
     world = World()
     world.add(b1)
     world.add(b2)
+    world.add(b3)
 
-    simulator = Simulator(world, DummyEngine, DummySolver)
+    simulator = Simulator(world, IEngine, ISolver)
 
     screen_size = Vector2(800, 600)
     screen = Screen(screen_size,
@@ -33,6 +38,7 @@ if __name__ == "__main__":
     # this coefficient controls the speed
     # of the simulation
     time_scale = 10
+    print(len(world))
 
     print("Start program")
     while not screen.should_quit:

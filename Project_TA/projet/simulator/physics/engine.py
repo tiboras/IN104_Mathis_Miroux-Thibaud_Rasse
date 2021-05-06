@@ -61,13 +61,16 @@ class IEngine:
             where xi, yi are the positions and vxi, vyi are the velocities.
         """
         N = len(self.world)
-        positions=np.zeros((2*N,1))
-        vitesse=np.zeros((2*N,1))
+       
+        postions=[]
+        vitesse=[]
         for k in range(N):
-            positions[2*k], positions[2*k+1]= self.world.get(k).position.get_x() , self.world.get(k).position.get_y()
-            vitesse[2*k],vitesse[2*k+1] =  self.world.get(k).velocity.get_x() , self.world.get(k).velocity.get_y()
-        result=np.concatenate((positions, vitesse), axis=None)
-        return result
+            positions.append(self.world.get(k).position.get_x())
+            positions.append(self.world.get(k).position.get_y())
+            vitesses.append(self.world.get(k).velocity.get_x())
+            vitesses.append(self.world.get(k).velocity.get_y())
+
+        return positions+vitesses
 
 
 

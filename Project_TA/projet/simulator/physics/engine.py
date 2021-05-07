@@ -100,4 +100,3 @@ class DummyEngine(IEngine):
             pos_vit[2*N+2*k]=self.world.get(k).velocity.get_x()
             pos_vit[2*N+2*k+1]=self.world.get(k).velocity.get_y()
         return pos_vit
-

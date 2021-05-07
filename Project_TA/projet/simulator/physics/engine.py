@@ -30,6 +30,37 @@ class IEngine:
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
         """
         """faire une matrice des forces"""
+        raise NotImplementedError
+
+        
+    def make_solver_state(self):
+        """ Returns the state given to the solver, it is the vector y in
+                y' = f(t, y)
+            In our case, it is the vector containing the 
+            positions and speeds of all our bodies:
+                [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
+            where xi, yi are the positions and vxi, vyi are the velocities.
+        """
+        raise NotImplementedError
+
+
+
+
+class DummyEngine(IEngine):
+
+    def derivatives(self, t0, y0):
+        """ This is the method that will be fed to the solver
+            it does not use it's first argument t0,
+            its second argument y0 is a vector containing the positions 
+            and velocities of the bodies, it is laid out as follow
+                [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
+            where xi, yi are the positions and vxi, vyi are the velocities.
+
+            Return the derivative of the state, it is laid out as follow
+                [vx1, vy1, vx2, vy2, ..., vxn, vyn, ax1, ay1, ax2, ay2, ..., axn, ayn]
+            where vxi, vyi are the velocities and axi, ayi are the accelerations.
+        """
+        """faire une matrice des forces"""
         N = len(self.world)
         Fx = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
         Fy = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
@@ -50,17 +81,16 @@ class IEngine:
         for i in range(N):
             deriv[2*N+ (2*i)] = (forces_appliques_x[i,0])/self.world.get(i).mass
             deriv[2*N+ (2*i+1)] = (forces_appliques_y[i,0])/self.world.get(i).mass
+        print(deriv)
         return deriv
 
-        
     def make_solver_state(self):
         """ Returns the state given to the solver, it is the vector y in
                 y' = f(t, y)
             In our case, it is the vector containing the 
             positions and speeds of all our bodies:
                 [x1, y1, x2, y2, ..., xn, yn, vx1, vy1, vx2, vy2, ..., vxn, vyn]
-            where xi, yi are the positions and vxi, vyi are the velocities.
-        """
+            where xi, yi are the positions and vxi, vyi are the velocities. """
         N = len(self.world)
        
         pos_vit=Vector(4*N)
@@ -69,11 +99,4 @@ class IEngine:
             pos_vit[2*k+1]=self.world.get(k).position.get_y()
             pos_vit[2*N+2*k]=self.world.get(k).velocity.get_x()
             pos_vit[2*N+2*k+1]=self.world.get(k).velocity.get_y()
-            print(pos_vit)
         return pos_vit
-
-
-
-
-class DummyEngine(IEngine):
-    pass

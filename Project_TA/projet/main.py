@@ -11,17 +11,16 @@ import pygame as pg
 if __name__ == "__main__":
     b1 = Body(Vector2(100, 300),
               velocity=Vector2(0, 0),
-              mass=1000,
-              draw_radius=10)
+              mass=10,
+              draw_radius=5)
     b2 = Body(Vector2(100, 400),
-              velocity=Vector2(0, 10),
-              mass=1,
-              draw_radius=5)
-
-    b3 = Body(Vector2(200, 500),
-              velocity=Vector2(0, 10),
-              mass=1000,
-              draw_radius=5)
+              velocity=Vector2(0, 0.2),
+              mass=10,
+              draw_radius=10)
+    b3 = Body(Vector2(200, 400),
+          velocity=Vector2(0, 0.2),
+          mass=10,
+          draw_radius=10)
     world = World()
     world.add(b1)
     world.add(b2)
@@ -37,7 +36,7 @@ if __name__ == "__main__":
 
     # this coefficient controls the speed
     # of the simulation
-    time_scale = 10
+    time_scale = 1
     print(len(world))
 
     print("Start program")

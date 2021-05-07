@@ -60,29 +60,40 @@ class DummyEngine(IEngine):
                 [vx1, vy1, vx2, vy2, ..., vxn, vyn, ax1, ay1, ax2, ay2, ..., axn, ayn]
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
         """
-        """faire une matrice des forces"""
+
         N = len(self.world)
-        Fx = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
-        Fy = np.zeros((N,N), dtype = Vector) #utiliser le inti ?
-        for i in range(len(self.world)):
-            for j in range(i):
-                Fx[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_x()-self.world.get(j).position.get_x())/((self.world.get(i).position-self.world.get(j).position).norm())**(3/2)
-                Fx[j,i] = -Fx[i,j]
-                Fy[i][j]=G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_y()-self.world.get(j).position.get_y())/((self.world.get(i).position-self.world.get(j).position).norm())**(3/2)
-                Fy[j,i] = -Fy[i,j]
-
-
-        forces_appliques_x = np.dot(Fx, np.ones((N,1))) #faire la somme des forces appliqueés à toutes les planètes
-        forces_appliques_y = np.dot(Fy, np.ones((N,1))) #faire la somme des forces appliqueés à toutes les planètes
-
         deriv = Vector(4*N)
-        for j in range(2*N) :
-            deriv[i] = y0[2*N+i]
-        for i in range(N):
-            deriv[2*N+ (2*i)] = (forces_appliques_x[i,0])/self.world.get(i).mass
-            deriv[2*N+ (2*i+1)] = (forces_appliques_y[i,0])/self.world.get(i).mass
-        print(deriv)
+        for i in range(N) :
+            deriv[2*i] = y0[(N+i)*2]
+            deriv[2*i+1] = y0[(N+i)*2]
+            acc_i = Vector2(0,0)
+            pos_i = Vector2(y0[2*i],y0[2*i+1])  
+            for j in range(2) :
+                if i!=j :
+                    acc_i += gravitational_force(pos_i,1,Vector2(y0[2*j],y0[2*j+1]),self.world.get(j).mass)
+            deriv[2*N+2*i] = acc_i.get_x()
+            deriv[2*N+2*i] = acc_i.get_y()
         return deriv
+
+
+        # Fx = np.zeros((N,N)) #utiliser le inti ?
+        # Fy = np.zeros((N,N)) #utiliser le inti ?
+        # for i in range(len(self.world)):
+        #     for j in range(i):
+        #         Fx[i][j]=-G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_x()-self.world.get(j).position.get_x())/((self.world.get(i).position-self.world.get(j).position).norm())**(3/2)
+        #         Fx[j,i] = -Fx[i,j]
+        #         Fy[i][j]=-G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_y()-self.world.get(j).position.get_y())/((self.world.get(i).position-self.world.get(j).position).norm())**(3/2)
+        #         Fy[j,i] = -Fy[i,j]
+        # forces_appliques_x = np.dot(Fx, np.ones((N,1))) #faire la somme des forces appliqueés à toutes les planètes
+        # forces_appliques_y = np.dot(Fy, np.ones((N,1))) #faire la somme des forces appliqueés à toutes les planètes
+
+        # deriv = Vector(4*N)
+        # for j in range(2*N) :
+        #     deriv[j] = y0[2*N+j]
+        # for i in range(N):
+        #     deriv[2*N+ (2*i)] = (forces_appliques_x[i,0])/self.world.get(i).mass
+        #     deriv[2*N+ (2*i+1)] = (forces_appliques_y[i,0])/self.world.get(i).mass
+        # return deriv
 
     def make_solver_state(self):
         """ Returns the state given to the solver, it is the vector y in

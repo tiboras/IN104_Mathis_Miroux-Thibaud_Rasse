@@ -40,4 +40,5 @@ class DummySolver(ISolver):
         dt=t//self.max_step_size
         for k in range(1,int(t)+1):
             y = y+(dt*(self.f(k*dt,y))) 
+        print(y)
         return y

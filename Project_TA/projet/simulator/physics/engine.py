@@ -8,7 +8,7 @@ def gravitational_force(pos1, mass1, pos2, mass2):
         by a body in pos2 with mass2
     """
     vect = pos2-pos1
-    return (( G*mass2*mass1/norm(vect)**3)*vect)
+    return (( G*mass2*mass1/vect.norm()**3)*vect)
 
 
 
@@ -100,3 +100,4 @@ class DummyEngine(IEngine):
             pos_vit[2*N+2*k]=self.world.get(k).velocity.get_x()
             pos_vit[2*N+2*k+1]=self.world.get(k).velocity.get_y()
         return pos_vit
+

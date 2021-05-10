@@ -37,8 +37,10 @@ class DummySolver(ISolver):
         """
 
         y=self.y0
-        dt=t//self.max_step_size
-        for k in range(1,int(t)+1):
-            y = y+(dt*(self.f(k*dt,y))) 
-        print(y)
+        N = int(t//self.max_step_size)
+        dt = self.max_step_size
+        for k in range(1,N):
+            funct = self.f(self.t0+k*dt,y)
+            y = y+dt*funct
+            # print(funct)
         return y

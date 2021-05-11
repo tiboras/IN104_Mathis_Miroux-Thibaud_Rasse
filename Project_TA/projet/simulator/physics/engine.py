@@ -10,42 +10,46 @@ def gravitational_force(pos1, mass1, pos2, mass2):
     vect = pos2-pos1
     return (G*mass2*mass1/(vect.norm()**3))*vect
 
-def colision(type,body1,body2):
-    if (body1.position -body2.position).norm() >(body1.draw_radius+body1.draw_radius):
-        return body1,body2
-    else:
-        if type==0:                  #fusion de 2 étoile
-            masstot=body1.mass+body2.mass
-            body1.mass=masstot
-            body2.mass=masstot
-            body1.velocity=1/masstot*(body1.mass*body1.velocity+body2.mass*body2.velocity) # consevation de la quantité de mouvement 
-            body2.velocity=1/masstot*(body1.mass*body1.velocity+body2.mass*body2.velocity)
-            body1.position=1/masstot*(body1.mass*body1.position+body2.mass*body2.position) # Centre de gravité
-            body2.position=1/masstot*(body1.mass*body1.position+body2.mass*body2.position) # Centre de gravité
-            body1.draw_radius=max(body1.draw_radius,body2.draw_radius)
-            body2.draw_radius=max(body1.draw_radius,body2.draw_radius)
+# def colision(type,body1,body2):
+#     if (body1.position -body2.position).norm() >(body1.draw_radius+body1.draw_radius):
+#         print ("3")
+#         return None
+#     else:
+#         if type==0:                  #fusion de 2 étoile
+#             masstot=body1.mass+body2.mass
+#             body1.mass=masstot
+#             body2.mass=0
+#             v=1/masstot*(body1.mass*body1.velocity+body2.mass*body2.velocity) # consevation de la quantité de mouvement 
+#             pos=1/masstot*(body1.mass*body1.position+body2.mass*body2.position) # Centre de gravité
+#             body1.position=pos
+#             body2.position=pos
+#             body1.velocity=v
+#             body2.velocity=v
+
+#             body1.draw_radius=max(body1.draw_radius,body2.draw_radius)
+#             body2.draw_radius=max(body1.draw_radius,body2.draw_radius)
 
 
 
 
 
-        if type==1:                    #collision élastique
-            m1=body1.mass
-            m2=body2.mass
-            v1=body1.velocity
-            v2=body2.velocity
-            nv1=body1.velocity.norm()
-            nv2=body1.velocity.norm()
-            teta1=np.arctan(v1.get_y()/v1.get_x())
-            teta2=np.arctan(v2.get_y()/v2.get_x())
-            teta1p=np.arctan((m1-m2)*np.tan(teta1)/(m1+m2)+2*m2*v2*np.sin(teta2)/((m1+m2)*v1*np.cos(teta1)))
-            teta2p=np.arctan((m2-m1)*np.tan(teta2)/(m1+m2)+2*m1*v1*np.sin(teta1)/((m1+m2)*v2*np.cos(teta2)))
-            v1p=np.sqrt(((m1-m2)*v1*np.sin(teta1)+2*m2*v2*np.sin(teta2))**2/(m1+m2)**2+(v1*np.cos(teta1))**2)
-            v2p=np.sqrt(((m2-m2)*v2*np.sin(teta2)+2*m2*v2*np.sin(teta2))**2/(m1+m2)**2+(v2*np.cos(teta2))**2)
-            body1.velocity.get_x()=v1p*cos(teta1)
-            body1.velocity.get_y()=v1p*sin(teta1)
-            body2.velocity.get_x()=v1p*cos(teta1)
-            body2.velocity.get_y()=v1p*sin(teta1)
+#         if type==1:                    #collision élastique
+#             m1=body1.mass
+#             m2=body2.mass
+#             v1=body1.velocity
+#             v2=body2.velocity
+#             nv1=body1.velocity.norm()
+#             nv2=body1.velocity.norm()
+#             teta1=np.arctan(v1.get_y()/v1.get_x())
+#             teta2=np.arctan(v2.get_y()/v2.get_x())
+#             teta1p=np.arctan((m1-m2)*np.tan(teta1)/(m1+m2)+2*m2*v2*np.sin(teta2)/((m1+m2)*v1*np.cos(teta1)))
+#             teta2p=np.arctan((m2-m1)*np.tan(teta2)/(m1+m2)+2*m1*v1*np.sin(teta1)/((m1+m2)*v2*np.cos(teta2)))
+#             v1p=np.sqrt(((m1-m2)*v1*np.sin(teta1)+2*m2*v2*np.sin(teta2))**2/(m1+m2)**2+(v1*np.cos(teta1))**2)
+#             v2p=np.sqrt(((m2-m2)*v2*np.sin(teta2)+2*m2*v2*np.sin(teta2))**2/(m1+m2)**2+(v2*np.cos(teta2))**2)
+#             V1=Vector2(v1p*cos(teta1),v1p*sin(teta1))
+#             V2=Vector2(v2p*cos(teta1),v2p*sin(teta1))
+#             body1.velocity=V1
+#             body2.velocity=V2
 
 
 
@@ -107,8 +111,14 @@ class DummyEngine(IEngine):
             pos_i = Vector2(y0[2*i],y0[2*i+1])  
             for j in range(N) :
                 if i!=j :
-                    #collision(type,self.world.get(i),type,self.world.get(j))
-                    if (self.world.get(i).position.get_x()!=self.world.get(j).position.get_x()) or (self.world.get(i).position.get_y()!=self.world.get(j).position.get_y())
+                    # colision(type,self.world.get(i),self.world.get(j))
+                    # print ("1")
+                    # print(self.world.get(i).position)
+                    # print(self.world.get(j).position)
+                    # print ("2")
+                    # print(self.world.get(j).velocity)
+                    # print(self.world.get(j).velocity)
+                    if (self.world.get(i).position.get_x()!=self.world.get(j).position.get_x()) or (self.world.get(i).position.get_y()!=self.world.get(j).position.get_y()):
 
                         acc_i += gravitational_force(pos_i,1,Vector2(y0[2*j],y0[2*j+1]),self.world.get(j).mass)
             deriv[2*N+2*i] = acc_i.get_x()

@@ -9,14 +9,14 @@ from simulator.graphics import Screen
 import pygame as pg
 
 if __name__ == "__main__":
-    b1 = Body(Vector2(0, 0),
+    b1 = Body(Vector2(0,0),
               velocity=Vector2(0, 0.2),
               mass=1,
               draw_radius=5)
-    b2 = Body(Vector2(1, 0),
+    b2 = Body(Vector2(1,0),
               velocity=Vector2(0,0),
               mass=10,
-              draw_radius=10)
+              draw_radius=5)
     world = World()
     world.add(b1)
     world.add(b2)

@@ -16,7 +16,7 @@ class Simulator:
         y0 = self.engine.make_solver_state()
 
 
-        self.solver = Solver(self.engine.derivatives, self.t, y0)
+        self.solver = Solver(self.engine.derivatives, self.t, y0, world)
 
     def step(self, h):
         y = self.solver.integrate(self.t + h)

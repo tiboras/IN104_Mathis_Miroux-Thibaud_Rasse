@@ -22,7 +22,7 @@ if __name__ == "__main__":
     world.add(b2)
 
 
-    simulator = Simulator(world, DummyEngine, DummySolver)
+    simulator = Simulator(world, DummyEngine, LeapFrogSolver)
 
     screen_size = Vector2(800, 600)
     screen = Screen(screen_size,

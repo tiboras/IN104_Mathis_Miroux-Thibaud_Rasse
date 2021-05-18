@@ -20,7 +20,7 @@ if __name__ == "__main__":
               velocity=Vector2(0,0),
               mass=10,
               
-              color = tuple(np.random.randint(256, size=3),
+              color = tuple(np.random.randint(256, size=3)),
                 draw_radius=5)
 
 

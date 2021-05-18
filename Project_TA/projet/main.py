@@ -7,16 +7,28 @@ from simulator.physics.engine import DummyEngine
 from simulator.graphics import Screen
 
 import pygame as pg
+import numpy as np 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     b1 = Body(Vector2(0,0),
+=======
+
+    #faire une boucle avec que des add pour afficher plein de corps
+    b1 = Body(Vector2(0, 0),
+>>>>>>> 4b3abf6deefb1bdcd5855409eb3c76b73814adee
               velocity=Vector2(0, 0.2),
-              mass=1,
+              mass=1, color = tuple(np.random.randint(256, size=3)),
               draw_radius=5)
     b2 = Body(Vector2(1,0),
               velocity=Vector2(0,0),
+<<<<<<< HEAD
               mass=10,
               draw_radius=5)
+=======
+              mass=10, color = tuple(np.random.randint(256, size=3)),
+              draw_radius=10)
+>>>>>>> 4b3abf6deefb1bdcd5855409eb3c76b73814adee
     world = World()
     world.add(b1)
     world.add(b2)
@@ -33,6 +45,7 @@ if __name__ == "__main__":
     # this coefficient controls the speed
     # of the simulation
     time_scale = 10
+    mv_cam_pas = 0.1
     print(len(world))
 
     print("Start program")
@@ -45,14 +58,22 @@ if __name__ == "__main__":
 
         # read events
         screen.get_events()
-
+        move_camera = Vector2(0, 0)
         # handle events
-        #   scroll wheel
+        #   scroll wheel and movements
         if screen.get_wheel_up():
             screen.camera.scale *= 1.1
         elif screen.get_wheel_down():
             screen.camera.scale *= 0.9
-
+        elif screen.get_key_right():
+            move_camera -= Vector2(mv_cam_pas,0)
+        elif screen.get_key_down():
+            move_camera -= Vector2(0,mv_cam_pas)
+        elif screen.get_key_left():
+            move_camera -= Vector2(-mv_cam_pas,0)
+        elif screen.get_key_up():
+            move_camera -= Vector2(0,-mv_cam_pas)
+        screen.camera.position += move_camera
         # draw current state
         screen.draw(world)
 

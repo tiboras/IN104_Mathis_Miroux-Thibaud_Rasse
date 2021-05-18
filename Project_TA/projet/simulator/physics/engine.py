@@ -12,12 +12,17 @@ def gravitational_force(pos1, mass1, pos2, mass2):
 
 # def colision(type,body1,body2):
 #     if (body1.position -body2.position).norm() >(body1.draw_radius+body1.draw_radius):
+<<<<<<< HEAD
 #         print ("3")
 #         return None
+=======
+#         return body1,body2
+>>>>>>> 4b3abf6deefb1bdcd5855409eb3c76b73814adee
 #     else:
 #         if type==0:                  #fusion de 2 étoile
 #             masstot=body1.mass+body2.mass
 #             body1.mass=masstot
+<<<<<<< HEAD
 #             body2.mass=0
 #             v=1/masstot*(body1.mass*body1.velocity+body2.mass*body2.velocity) # consevation de la quantité de mouvement 
 #             pos=1/masstot*(body1.mass*body1.position+body2.mass*body2.position) # Centre de gravité
@@ -26,6 +31,13 @@ def gravitational_force(pos1, mass1, pos2, mass2):
 #             body1.velocity=v
 #             body2.velocity=v
 
+=======
+#             body2.mass=masstot
+#             body1.velocity=1/masstot*(body1.mass*body1.velocity+body2.mass*body2.velocity) # consevation de la quantité de mouvement 
+#             body2.velocity=1/masstot*(body1.mass*body1.velocity+body2.mass*body2.velocity)
+#             body1.position=1/masstot*(body1.mass*body1.position+body2.mass*body2.position) # Centre de gravité
+#             body2.position=1/masstot*(body1.mass*body1.position+body2.mass*body2.position) # Centre de gravité
+>>>>>>> 4b3abf6deefb1bdcd5855409eb3c76b73814adee
 #             body1.draw_radius=max(body1.draw_radius,body2.draw_radius)
 #             body2.draw_radius=max(body1.draw_radius,body2.draw_radius)
 
@@ -46,10 +58,17 @@ def gravitational_force(pos1, mass1, pos2, mass2):
 #             teta2p=np.arctan((m2-m1)*np.tan(teta2)/(m1+m2)+2*m1*v1*np.sin(teta1)/((m1+m2)*v2*np.cos(teta2)))
 #             v1p=np.sqrt(((m1-m2)*v1*np.sin(teta1)+2*m2*v2*np.sin(teta2))**2/(m1+m2)**2+(v1*np.cos(teta1))**2)
 #             v2p=np.sqrt(((m2-m2)*v2*np.sin(teta2)+2*m2*v2*np.sin(teta2))**2/(m1+m2)**2+(v2*np.cos(teta2))**2)
+<<<<<<< HEAD
 #             V1=Vector2(v1p*cos(teta1),v1p*sin(teta1))
 #             V2=Vector2(v2p*cos(teta1),v2p*sin(teta1))
 #             body1.velocity=V1
 #             body2.velocity=V2
+=======
+#             body1.velocity.get_x()=v1p*cos(teta1)
+#             body1.velocity.get_y()=v1p*sin(teta1)
+#             body2.velocity.get_x()=v1p*cos(teta1)
+#             body2.velocity.get_y()=v1p*sin(teta1)
+>>>>>>> 4b3abf6deefb1bdcd5855409eb3c76b73814adee
 
 
 
@@ -100,6 +119,9 @@ class DummyEngine(IEngine):
             Return the derivative of the state, it is laid out as follow
                 [vx1, vy1, vx2, vy2, ..., vxn, vyn, ax1, ay1, ax2, ay2, ..., axn, ayn]
             where vxi, vyi are the velocities and axi, ayi are the accelerations.
+
+            Edit : to do the leapfrog solver, it is necessary to keep the previous accelerations in mind
+            So we added
         """
         type=0
         N = len(self.world)
@@ -111,6 +133,7 @@ class DummyEngine(IEngine):
             pos_i = Vector2(y0[2*i],y0[2*i+1])  
             for j in range(N) :
                 if i!=j :
+<<<<<<< HEAD
                     # colision(type,self.world.get(i),self.world.get(j))
                     # print ("1")
                     # print(self.world.get(i).position)
@@ -120,31 +143,16 @@ class DummyEngine(IEngine):
                     # print(self.world.get(j).velocity)
                     if (self.world.get(i).position.get_x()!=self.world.get(j).position.get_x()) or (self.world.get(i).position.get_y()!=self.world.get(j).position.get_y()):
 
+=======
+                    #collision(type,self.world.get(i),type,self.world.get(j))
+                    if (self.world.get(i).position.get_x()!=self.world.get(j).position.get_x()) or (self.world.get(i).position.get_y()!=self.world.get(j).position.get_y()) :
+>>>>>>> 4b3abf6deefb1bdcd5855409eb3c76b73814adee
                         acc_i += gravitational_force(pos_i,1,Vector2(y0[2*j],y0[2*j+1]),self.world.get(j).mass)
             deriv[2*N+2*i] = acc_i.get_x()
             deriv[2*N+2*i+1] = acc_i.get_y()
             
         return deriv
 
-
-        # Fx = np.zeros((N,N)) #utiliser le inti ?
-        # Fy = np.zeros((N,N)) #utiliser le inti ?
-        # for i in range(len(self.world)):
-        #     for j in range(i):
-        #         Fx[i][j]=-G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_x()-self.world.get(j).position.get_x())/((self.world.get(i).position-self.world.get(j).position).norm())**(3/2)
-        #         Fx[j,i] = -Fx[i,j]
-        #         Fy[i][j]=-G*self.world.get(i).mass*self.world.get(j).mass*(self.world.get(i).position.get_y()-self.world.get(j).position.get_y())/((self.world.get(i).position-self.world.get(j).position).norm())**(3/2)
-        #         Fy[j,i] = -Fy[i,j]
-        # forces_appliques_x = np.dot(Fx, np.ones((N,1))) #faire la somme des forces appliqueés à toutes les planètes
-        # forces_appliques_y = np.dot(Fy, np.ones((N,1))) #faire la somme des forces appliqueés à toutes les planètes
-
-        # deriv = Vector(4*N)
-        # for j in range(2*N) :
-        #     deriv[j] = y0[2*N+j]
-        # for i in range(N):
-        #     deriv[2*N+ (2*i)] = (forces_appliques_x[i,0])/self.world.get(i).mass
-        #     deriv[2*N+ (2*i+1)] = (forces_appliques_y[i,0])/self.world.get(i).mass
-        # return deriv
 
     def make_solver_state(self):
         """ Returns the state given to the solver, it is the vector y in

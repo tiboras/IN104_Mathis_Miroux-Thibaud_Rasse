@@ -10,25 +10,19 @@ import pygame as pg
 import numpy as np 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    b1 = Body(Vector2(0,0),
-=======
 
     #faire une boucle avec que des add pour afficher plein de corps
     b1 = Body(Vector2(0, 0),
->>>>>>> 4b3abf6deefb1bdcd5855409eb3c76b73814adee
               velocity=Vector2(0, 0.2),
               mass=1, color = tuple(np.random.randint(256, size=3)),
               draw_radius=5)
     b2 = Body(Vector2(1,0),
               velocity=Vector2(0,0),
-<<<<<<< HEAD
               mass=10,
-              draw_radius=5)
-=======
-              mass=10, color = tuple(np.random.randint(256, size=3)),
-              draw_radius=10)
->>>>>>> 4b3abf6deefb1bdcd5855409eb3c76b73814adee
+              draw_radius=5
+              mass=10, color = tuple(np.random.randint(256, size=3)))
+
+
     world = World()
     world.add(b1)
     world.add(b2)

@@ -123,7 +123,6 @@ class DummyEngine(IEngine):
             pos_i = Vector2(y0[2*i],y0[2*i+1])  
             for j in range(N) :
                 if i!=j :
-<<<<<<< HEAD
                     # colision(type,self.world.get(i),self.world.get(j))
                     # print ("1")
                     # print(self.world.get(i).position)

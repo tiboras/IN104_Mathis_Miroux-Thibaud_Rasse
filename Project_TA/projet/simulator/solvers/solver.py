@@ -45,18 +45,19 @@ class DummySolver(ISolver):
         """
 
         y=self.y0
-        N = int(t//self.max_step_size)
+        N = int((t-self.t0)//self.max_step_size)
         dt = self.max_step_size
         for k in range(1,N):
             funct = self.f(self.t0+k*dt,y)
             y = y+dt*funct
-            # print(funct)
+        self.y0 = y
+        self.t0 = t
         return y
 
 class LeapFrogSolver(ISolver):
     def integrate(self, t):
         y=self.y0 
-        N = int(t//self.max_step_size)
+        N = int((t-self.t0)//self.max_step_size)
         dt = self.max_step_size
         nb = int(len(y)/4)
         for k in range(1,N):
@@ -72,4 +73,6 @@ class LeapFrogSolver(ISolver):
                 f[2*nb+2*i] += acc_i.get_x()/2
                 f[2*nb+2*i+1] += acc_i.get_y()/2
             y = y+dt*f
+        self.y0 = y
+        self.t0 = t
         return y

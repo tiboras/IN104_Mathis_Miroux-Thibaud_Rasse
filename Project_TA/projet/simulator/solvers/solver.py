@@ -14,7 +14,7 @@ class ISolver:
     # and build a more general library that
     # we will be able to reuse some day
 
-    def __init__(self, f, t0, y0, world,max_step_size=0.01):
+    def __init__(self, f, t0, y0,world,max_step_size=0.01):
         self.f = f
         self.t0 = t0
         self.y0 = y0

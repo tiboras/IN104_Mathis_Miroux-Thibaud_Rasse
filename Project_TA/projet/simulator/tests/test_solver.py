@@ -1,6 +1,6 @@
 import unittest
 from math import cos, sin, sqrt, exp, pi
-from ..solvers.solver import ISolver
+from ..solvers.solver import *
 
 # region ODE Systems
 
@@ -75,8 +75,7 @@ class SolverTestCase(unittest.TestCase):
 
                 for solver in SOLVERS:
                     with self.subTest(solver=solver):
-                        solver_instance = solver(
-                            f, t0, exact_y0, max_step_size=0.0001)
+                        solver_instance = solver(f, t0, exact_y0, max_step_size=0.0001)
                         approx = solver_instance.integrate(t0 + h)
 
                         self.assertAlmostEqual(approx, exact, places=3)

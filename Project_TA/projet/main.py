@@ -30,9 +30,9 @@ if __name__ == "__main__":
               draw_radius=20)
     b2 = Body(Vector2(1,1),
               velocity=Vector2(0.0001,-0.2),
-              mass=1,
+              mass=5,
               color = tuple(np.random.randint(256, size=3)),
-                draw_radius=10)
+                draw_radius=20)
 
 
     world = World()

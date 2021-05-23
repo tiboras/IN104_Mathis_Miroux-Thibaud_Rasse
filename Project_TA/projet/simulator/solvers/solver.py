@@ -100,6 +100,27 @@ class LeapFrogSolver(ISolver):
                 f[2*nb+2*i] += acc_i.get_x()/2
                 f[2*nb+2*i+1] += acc_i.get_y()/2
             y = y+dt*f
+        for i in range(len(self.world)):
+            b_i = self.world.get(i)
+            b_i.position.set_x(y[2 * i])
+            b_i.position.set_y(y[2 * i + 1])
+            b_i.velocity.set_x(y[len(self.world)*2 + 2 * i])
+            b_i.velocity.set_y(y[len(self.world)*2 + 2 * i + 1])
+            
+            mur(b_i)
+            for j in range(i+1):
+                if i!=j:
+                    b_j = self.world.get(j)
+                    colision(type,b_i,b_j)
+        for i in range(len(self.world)):
+            b_i = self.world.get(i)
+
+            y[2 * i]=b_i.position.get_x()
+            y[2 * i + 1]=b_i.position.get_y()
+            
+
+            y[len(self.world)*2 + 2 * i]=b_i.velocity.get_x()
+            y[len(self.world)*2 + 2 * i + 1]=b_i.velocity.get_y()   
         self.y0 = y
         self.t0 = t
         return y
@@ -108,14 +129,12 @@ class LeapFrogSolver(ISolver):
 
 def colision(type,body1,body2):
     rapport = 50
-    if (body1.position -body2.position).norm()>0:
+    if (body1.position -body2.position).norm()>0:                                                   # on verifie que les 2 concerné ne sont pas deja le resultat d'une fusion
         Ep=G*body1.mass*body2.mass/((body1.position -body2.position).norm())
         Ec=0.5*(body1.velocity.norm())**2*body1.mass+0.5*(body2.velocity.norm())**2*body2.mass
-        print(1)
-        print(Ep)
-        print(Ec)
-        
-        if ((body1.position -body2.position).norm()*rapport >(body1.draw_radius+body2.draw_radius)):
+
+
+        if ((body1.position -body2.position).norm()*rapport >(body1.draw_radius+body2.draw_radius)):   #on regarde si la distanste entre 2 corps est suffisament faible pour qu'il y ai un choc 
             return None
         else:
             if Ep>Ec:   
@@ -132,20 +151,14 @@ def colision(type,body1,body2):
                     body2.velocity=v
                     body1.mass=masstot
                     body2.mass=0
-                    r=((body1.draw_radius)**(3)+(body2.draw_radius)**(3))**(1/3)
+                    r=((body1.draw_radius)**(3)+(body2.draw_radius)**(3))**(1/3) #rayon résultant de la somme des volumes
                     body1.draw_radius=r
-                    body2.draw_radius=r
-
-                
-                
+                    body2.draw_radius=0
 
 
 
-
-
-            if Ec>=Ep:   
+            if Ec>=Ep and (body1.mass*body2.mass>0):   # cas de la collsion elastique
             
-                print(5)
                 r1=body1.draw_radius
                 r2=body2.draw_radius
                 R=r1+r2

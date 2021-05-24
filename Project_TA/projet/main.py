@@ -22,7 +22,7 @@ def add_body(body,y0,N) :
 
 if __name__ == "__main__":
     #tuple(np.random.randint(256, size=3))
-    type=2
+    type=1
 
     if type==0:                                             #cas 1 pour présenter la satelisation
         b1 = Body(Vector2(0, 0),

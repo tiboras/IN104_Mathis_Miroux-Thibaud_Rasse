@@ -22,22 +22,61 @@ def add_body(body,y0,N) :
 
 if __name__ == "__main__":
     #tuple(np.random.randint(256, size=3))
+    type=2
 
-    #faire une boucle avec que des add pour afficher plein de corps
-    b1 = Body(Vector2(0, 0),
-              velocity=Vector2(0.00001, 0.00001),
-              mass=10, color=tuple(np.random.randint(256, size=3)),
-              draw_radius=20)
-    b2 = Body(Vector2(1,1),
-              velocity=Vector2(0.0001,-0.2),
-              mass=5,
-              color = tuple(np.random.randint(256, size=3)),
-                draw_radius=20)
+    if type==0:                                             #cas 1 pour présenter la satelisation
+        b1 = Body(Vector2(0, 0),
+                  velocity=Vector2(0.00001, 0.00001),
+                  mass=10, color=tuple(np.random.randint(230, size=3)),
+                  draw_radius=10)
+        b2 = Body(Vector2(1,1),
+                  velocity=Vector2(0.0001,-0.2),
+                  mass=5,
+                  color = tuple(np.random.randint(230, size=3)),
+                    draw_radius=5)
+        world = World()
+        world.add(b1)
+        world.add(b2)
+    if type==1:                                             #cas 1 pour présenter la fusion
+        b1 = Body(Vector2(0, 0),
+                  velocity=Vector2(0.00001, 0.00001),
+                  mass=10, color=tuple(np.random.randint(230, size=3)),
+                  draw_radius=20)
+        b2 = Body(Vector2(1,1),
+                  velocity=Vector2(0.0001,-0.2),
+                  mass=5,
+                  color = tuple(np.random.randint(230, size=3)),
+                    draw_radius=10)
+        world = World()
+        world.add(b1)
+        world.add(b2)
+    if type==2:      # cas 2 pour presenter la config gaz
+        b1 = Body(Vector2(0, 0),
+                  velocity=Vector2(0.00001, 0.00001),
+                  mass=1, color=tuple(np.random.randint(230, size=3)),
+                  draw_radius=10)
+        b2 = Body(Vector2(1,0.5230),
+                  velocity=Vector2(0.0001,-0.1),
+                  mass=1,
+                  color = tuple(np.random.randint(230, size=3)),
+                    draw_radius=10)
+        b3 = Body(Vector2(1, 0),
+                  velocity=Vector2(-0.1, 0.00001),
+                  mass=1, color=tuple(np.random.randint(230, size=3)),
+                  draw_radius=10)
+        b4 = Body(Vector2(0,1),
+                  velocity=Vector2(-0.1,-0.2),
+                  mass=1,
+                  color = tuple(np.random.randint(230, size=3)),
+                    draw_radius=10)
+        world = World()
+        world.add(b1)
+        world.add(b2)
+        world.add(b3)
+        world.add(b4)
 
 
-    world = World()
-    world.add(b1)
-    world.add(b2)
+    
 
 
     simulator = Simulator(world, DummyEngine, DummySolver)

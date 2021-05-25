@@ -1,6 +1,7 @@
 import unittest
 from math import cos, sin, sqrt, exp, pi
 from ..solvers.solver import *
+from .. import Simulator, World, Body
 
 # region ODE Systems
 
@@ -67,6 +68,12 @@ class SolverTestCase(unittest.TestCase):
         x0 = 0.600686
         t0 = 0.1243
         h = 1
+        b1 = Body(Vector2(0, 0),
+              velocity=Vector2(0.00001, 0.00001),
+              mass=10, color=tuple(np.random.randint(256, size=3)),
+              draw_radius=20)
+        world = World()
+        world.add(b1)
 
         for (name, f, solution) in ODE_SYSTEMS:
             with self.subTest(name=name):
@@ -75,7 +82,7 @@ class SolverTestCase(unittest.TestCase):
 
                 for solver in SOLVERS:
                     with self.subTest(solver=solver):
-                        solver_instance = solver(f, t0, exact_y0, max_step_size=0.0001)
+                        solver_instance = solver(f, t0, exact_y0, world, max_step_size=0.0001)
                         approx = solver_instance.integrate(t0 + h)
 
                         self.assertAlmostEqual(approx, exact, places=3)

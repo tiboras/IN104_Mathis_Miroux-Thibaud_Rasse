@@ -183,8 +183,8 @@ def colision(type,body1,body2):
                 body2.vitesse=vp1*Rotation(thetap1,n) #vecteurs vitesse des corps
                 body1.vitesse=vp2*Rotation(thetap2,n)
                 milieu=(r1*body2.position+r2*body1.position)/R
-                body1.position=milieu+r2*e 
-                body2.position=milieu-r1*e
+                body1.position=milieu+r1*e 
+                body2.position=milieu-r2*e
                 body1.velocity=Vector2(vp1*np.cos(thetap1),vp1*np.sin(thetap1))
                 body2.velocity=Vector2(vp2*np.cos(thetap2),vp2*np.sin(thetap2))
 
@@ -198,12 +198,16 @@ def mur(body):
     vy=body.velocity.get_y()
     if (p.get_x()*rapport-R)<-400:
         vx=-vx
+        p.set_x((-400+R)/rapport)
     if (p.get_y()*rapport-R)<-300:
         vy=-vy
+        p.set_y((-300+R)/rapport)
     if (p.get_x()*rapport+R)>400:
         vx=-vx
+        p.set_x((400-R)/rapport)
     if (p.get_y()*rapport+R)>300:
         vy=-vy
+        p.set_y((300-R)/rapport)
     body.velocity=Vector2(vx,vy)
 
 

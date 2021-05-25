@@ -2,7 +2,7 @@
 
 from simulator import Simulator, World, Body
 from simulator.utils.vector import Vector, Vector2
-from simulator.solvers.solver import DummySolver
+from simulator.solvers.solver import DummySolver,LeapFrogSolver
 from simulator.physics.engine import DummyEngine
 from simulator.graphics import Screen
 
